@@ -5,7 +5,6 @@
 const { spawn } = require('child_process');
 const nativeMessage = require('chrome-native-messaging');
 const events = require('events');
-const debug = require('debug')('noble-winrt');
 const path = require('path');
 
 const BLE_SERVER_EXE = path.resolve(__dirname, 'prebuilt', 'BLEServer.exe');
@@ -139,7 +138,6 @@ class WinrtBindings extends events.EventEmitter {
     }
 
     _processMessage(message) {
-        debug('in:', message);
         switch (message._type) {
             case 'Start':
                 this.state = 'poweredOn';
@@ -191,7 +189,6 @@ class WinrtBindings extends events.EventEmitter {
     }
 
     _sendMessage(message) {
-        debug('out:', message);
         const dataBuf = Buffer.from(JSON.stringify(message), 'utf-8');
         const lenBuf = Buffer.alloc(4);
         lenBuf.writeInt32LE(dataBuf.length, 0);

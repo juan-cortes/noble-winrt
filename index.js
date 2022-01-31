@@ -9,9 +9,9 @@ if (os.platform() === 'win32') {
         throw new Error('Noble WinRT bindings require Windows >= 10.0.15014.');
     }
 
-    const Noble = require('noble/lib/noble');
+    const Noble = require('@abandonware/noble/lib/noble');
     const { WinrtBindings } = require('./bindings.js');
     module.exports = new Noble(new WinrtBindings());
 } else {
-    module.exports = require('noble');;
+    module.exports = require('@abandonware/noble');;
 }
